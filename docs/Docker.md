@@ -1,5 +1,50 @@
 ### Docker
 
+#### Centos7 安装 Docker 并配置
+
+- 在 CentOS 7安装docker要求系统为64位、系统内核版本为 3.10 以上，可以使用以下命令查看
+
+```shell script
+uname -r
+```
+
+- yum 安装 Docker
+
+    - 查看是否安装Docker
+     ```shell script
+     yum list installed | grep docker
+     ```
+    - 安装 docker
+     ```shell script
+     yum -y install docker
+     ```
+    - Docker运行相关命令
+    ```shell script
+     systemctl start docker         -> 启动
+     systemctl restart docker       -> 启动
+     systemctl stop docker          -> 停止
+     systemctl start docker         -> 设置开机自启
+    ```
+
+- Docker 常用命令
+```docker
+docker version                          -> 查看 Docker 版本信息
+docker inspect                          -> 用于查看镜像和容器的详细信息，默认会列出全部信息，可以通过--format参数来指定输出的模板格式，以便输出特定信息
+docker ps                               -> 默认显示当前正在运行中的container
+docker ps -a                            -> 查看包括已经停止的所有容器
+docker ps -l                            -> 显示最新启动的一个容器（包括已停止的）
+docker images                           -> 列出所有镜像
+docker search                           -> 搜索镜像
+docker pull                             -> 下载镜像
+docker rm                               -> 删除容器
+docker rmi                              -> 删除镜像
+docker logs                             -> 查看日志
+docker exec -it                         -> 开启一个交互的终端
+```
+
+
+
+
 #### Docker 安装 MySQL 并挂载文件
 
 - docker 命令
@@ -43,9 +88,7 @@ docker run -d -- name redis --restart=always --privileged=true \
 -v /data/redis/data:/data redis-server /etc/redis/redis.conf --appendonly yes
 ```
 
-
-
-#### 命令介绍
+#### Docker 命令介绍
 ```textmate
 -d                                                              -> 以守护进程的方式启动容器
 -p 6379:6379                                                    -> 绑定宿主机端口
