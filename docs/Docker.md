@@ -21,12 +21,13 @@ uname -r
     - Docker运行相关命令
     ```shell script
      systemctl start docker         -> 启动
-     systemctl restart docker       -> 启动
+     systemctl restart docker       -> 重启
      systemctl stop docker          -> 停止
      systemctl start docker         -> 设置开机自启
     ```
 
 - Docker 常用命令
+
 ```docker
 docker version                          -> 查看 Docker 版本信息
 docker inspect                          -> 用于查看镜像和容器的详细信息，默认会列出全部信息，可以通过--format参数来指定输出的模板格式，以便输出特定信息
@@ -42,7 +43,20 @@ docker logs                             -> 查看日志
 docker exec -it                         -> 开启一个交互的终端
 ```
 
-
+- 配置 Docker 国内阿里云加速器
+    
+    - 编辑 daemon.json 文件
+    ```shell script
+    vim /etc/docker/daemon.json
+    ```
+    - 文件内容
+    ```shell script
+     "registry-mirrors": ["https://ufymxqo5.mirror.aliyuncs.com"]
+    ```
+    - 重启 Docker
+    ```shell script
+    systemctl restart docker
+    ```
 
 
 #### Docker 安装 MySQL 并挂载文件
@@ -56,7 +70,6 @@ docker run -i -t --name mysql --restart=always --privileged=true -e MYSQL_ROOT_P
 -v /data/mysql/logs:/var/log/mysql -d mysql \
 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 ```
-
 
 - my.cnf 配置 修改默认的 sql_mode
 
