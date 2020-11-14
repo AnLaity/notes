@@ -64,11 +64,7 @@ docker exec -it                         -> 开启一个交互的终端
 - docker 命令
 
 ```
-docker run -i -t --name mysql --restart=always --privileged=true -e MYSQL_ROOT_PASSWORD=数据库密码 -p 3306:3306 \ 
--v /data/mysql/data:/var/lib/mysql \
--v /data/mysql/cnf:/etc/mysql/conf.d \
--v /data/mysql/logs:/var/log/mysql -d mysql \
---character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+docker run -i -t --name mysql --restart=always --privileged=true -e MYSQL_ROOT_PASSWORD=hope0416. -p 7000:3306 -v /data/mysql/data:/var/lib/mysql -v /data/mysql/cnf:/etc/mysql/conf.d -v /data/mysql/logs:/var/log/mysql -d mysql --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 ```
 
 - my.cnf 配置 修改默认的 sql_mode
@@ -96,9 +92,7 @@ docker run -i -t --name nginx --restart=always --privileged=true -d -p 80:80 -p 
 
 - docker 命令
 ```
-docker run -d -- name redis --restart=always --privileged=true \
--p 6379:6379 --restart always -v /data/redis/conf/redis.conf:/etc/redis/redis.conf \
--v /data/redis/data:/data redis-server /etc/redis/redis.conf --appendonly yes
+docker run -d --privileged=true --restart=always -p 7001:6379 -v /data/redis/conf/redis.conf:/etc/redis/redis.conf -v /data/redis/data:/data --name redis redis:latest redis-server --appendonly yes --requirepass "hope"
 ```
 
 #### Docker 命令介绍
@@ -114,6 +108,7 @@ docker run -d -- name redis --restart=always --privileged=true \
 --character-set-server=utf8mb4                                  -> MySQL编码格式
 --collation-server=utf8mb4_unicode_ci                           -> MySQL编码格式
 -e MYSQL_ROOT_PASSWORD                                          -> MySQL默认密码
+--requirepass                                                   -> Redis 登录密码
 ```
 
 
